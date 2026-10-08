@@ -83,7 +83,7 @@ print("\nТовары с низким остатком (≤ 3 шт.):")
 for p in low_stock:
     print(p['name'])
 
-# Шаг 18. Поиск по названию
+
 def search_products(query):
     query = query.lower()
     return [p for p in products if query in p['name'].lower()]
@@ -95,7 +95,7 @@ for p in found:
     print(p['name'])
  
  
-# Шаг 19. Фильтр по цене
+
 def filter_by_price(products, min_price, max_price):
     return [p for p in products if min_price <= p['price'] <= max_price]
  
@@ -106,9 +106,8 @@ for p in result:
     print(f"{p['name']} — {p['price']} руб.")
  
  
-# ===== Задание 7. Мини-задача «Корзина» =====
+
  
-# Шаг 20
 def add_to_cart(cart, product, size, quantity):
     cart.append({
         'product': product['name'],
@@ -148,4 +147,59 @@ print("\nПосле изменений:")
 for item in cart:
     print(f"{item['product']}, размер {item['size']}, {item['quantity']} шт.")
 print(f"Итого: {total_sum(cart)} руб.")
+
+
+
+
+# ===== Задание 8  =====
+ 
+
+products.append({'id': 4, 'name': 'Gazelle', 'price': 9490.0,
+                 'sizes': {40.0: 3, 41.0: 1}})
+products.append({'id': 5, 'name': 'Stan Smith', 'price': 5290.0,
+                 'sizes': {38.0: 6, 39.0: 4, 40.0: 2}})
+ 
+print("\nКаталог после добавления товаров:")
+for p in products:
+    print(f"{p['id']}. {p['name']} — {p['price']} руб.")
+ 
+ 
+
+def get_sizes(product):
+    return [size for size, qty in product['sizes'].items() if qty > 0]
+ 
+ 
+print("\nДоступные размеры:")
+for p in products:
+    print(f"{p['name']}: {get_sizes(p)}")
+ 
+ 
+
+def get_total_quantity(product):
+    return sum(product['sizes'].values())
+ 
+ 
+print("\nОбщее количество на складе:")
+for p in products:
+    print(f"{p['name']}: {get_total_quantity(p)} шт.")
+ 
+
+sorted_by_name = sorted(products, key=lambda p: p['name'])
+print("\nТовары по алфавиту:")
+for p in sorted_by_name:
+    print(p['name'])
+ 
+
+cheap = [p for p in products if p['price'] < 6000]
+print("\nТовары дешевле 6000 руб.:")
+for p in cheap:
+    print(f"{p['name']} — {p['price']} руб.")
+ 
+
+print("\nВсе товары (через while):")
+i = 0
+while i < len(products):
+    p = products[i]
+    print(f"{p['name']} — {p['price']} руб.")
+    i += 1
  
